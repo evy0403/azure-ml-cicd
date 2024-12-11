@@ -1,0 +1,27 @@
+# job.yaml
+trigger:
+  branches:
+    include:
+      - main  # Trigger the pipeline on changes to the main branch
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  pythonVersion: '3.9'  # Define the Python version
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(pythonVersion)'
+    addToPath: true
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install pandas numpy scikit-learn
+  displayName: 'Install Dependencies'
+
+- script: |
+    python model.py --trainingdata "C:\\Users\\Evelyn\\Documents\\har-project\\mydata.csv"
+  displayName: 'Run HAR Model Training'
+
