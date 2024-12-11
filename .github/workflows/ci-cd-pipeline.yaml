@@ -1,0 +1,28 @@
+name: Azure ML CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.FOR_OUTPUTS }}
+
+
+      - name: Set subscription
+        run: az account set --subscription 13227d92-9917-48d2-a3e5-e55c17470502
+
+    
+      - name: Submit Azure ML job
+        run: az ml job create --file production/job.yaml
