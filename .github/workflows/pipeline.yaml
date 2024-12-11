@@ -1,36 +1,4 @@
-name: Test Train Model Workflow
-
-on: 
+on:
   push:
     branches:
-      - main  # Trigger workflow only for changes in the main branch
-
-jobs:
-  train-model:
-    runs-on: windows-latest
-
-    steps:
-   
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
-
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    
-    - name: Run the training script
-      run: |
-        python train_model.py --trainingdata "mydata.csv" --output_model "trained_model"
-
- 
-    - name: List output directory
-      run: dir trained_model
+      - main
