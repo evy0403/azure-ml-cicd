@@ -6,6 +6,8 @@ jobs:
   fist-job:
     runs-on: windows-latest
     steps:
-      -run:node--version
-      -run: npm--version
+      -name: Display Python Version
+        run: python --version
+
+        
       
